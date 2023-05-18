@@ -1,6 +1,7 @@
 import "./App.css";
 import WaveAnimation from "./WaveAnimation";
 import Footer from "./Footer";
+import Card from "./Card";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
         </div>
       </header>
       <br></br>
-      <div className="try">formok</div>
+        <div>
+          <Card />
+        </div>
       <Footer />
     </>
   );
