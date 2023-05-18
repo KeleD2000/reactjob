@@ -1,6 +1,9 @@
 import React from "react";
 import "./Card.css";
 import Form from "./Form";
+import EForm from "./EForm";
+
+
 
 const Card = () => {
   return (
@@ -9,14 +12,14 @@ const Card = () => {
         <div className="flex">
           <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
             <div className="px-6">
-              <div className="font-bold text-xl mb-2">Company data</div>
+              <div className="font-bold text-xl mb-2 cardtitle">Company data</div>
               <Form />
             </div>
           </div>
           <div className="max-w-sm rounded overflow-hidden shadow-lg mx-8">
             <div className="px-6">
-              <div className="font-bold text-xl mb-2">Employee data</div>
-              <p className="text-gray-700 text-base">segg</p>
+              <div className="font-bold text-xl mb-2 cardtitle">Employee data</div>
+              <EForm/>
             </div>
           </div>
         </div>
