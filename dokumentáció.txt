@@ -1,0 +1,1 @@
+Az én React applikációmba maga a Reactot, és Tailwind css keretrendszert használtam. A feladatban írtak alapján hoztam létre az inputok, és a validációkat is ahogy az meg lett adva. Reacton belül oldottam meg a validációkat. Ha rányomunk a Submit gombra akkor JSON-ben eltárolja az adott adatokat amiket írtunk és ezt a console-on látjuk. 
