@@ -1,7 +1,7 @@
-.card {
-    width: 100px;
-}
-
 .cardtitle{
     text-align: center;
+}
+
+.card{
+    height: 420px;
 }

@@ -11,15 +11,9 @@ const Form = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const { email, value2 } = e.target;
-    const { numberofe, value3 } = e.target;
-    const { description, value4 } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      [email]: value2,
-      [numberofe]: value3,
-      [description]: value4,
     }));
   };
 
@@ -30,7 +24,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="input-container">
         <label>
           Name:
@@ -39,7 +33,7 @@ const Form = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
           />
         </label>
       </div>
@@ -51,7 +45,7 @@ const Form = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
           />
         </label>
       </div>
@@ -63,7 +57,7 @@ const Form = () => {
             name="numberofe"
             value={formData.numberofe}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
           />
         </label>
       </div>
@@ -75,21 +69,20 @@ const Form = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
           />
         </label>
       </div>
       <div className="flex justify-center">
         <button
           type="submit"
-          className="submit-button bg-blue-500 text-white px-4 py-2 rounded"
+          className="submit-button bg-blue-500 text-white px-2 py-1 rounded"
         >
           Submit
         </button>
       </div>
     </form>
   );
-  
 };
 
 export default Form;

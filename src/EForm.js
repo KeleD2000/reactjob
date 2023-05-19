@@ -6,20 +6,21 @@ const EForm = () => {
     name: "",
     email: "",
     age: "",
-    CV_field: "",
+    jobTitle: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const { email, value2 } = e.target;
-    const { age, value3 } = e.target;
-    const { CV_field, value4 } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-      [email]: value2,
-      [age]: value3,
-      [CV_field]: value4,
+    }));
+  };
+
+  const handleJobTitleSelect = (selectedJobTitle) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      jobTitle: selectedJobTitle,
     }));
   };
 
@@ -29,8 +30,21 @@ const EForm = () => {
     console.log(jsonData);
   };
 
+  const jobTitleOptions = ["Accountant", "Software Developer", "Software Tester", "Manager"];
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const selectJobTitle = (jobTitle) => {
+    handleJobTitleSelect(jobTitle);
+    setIsDropdownOpen(false);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-sm mx-auto relative">
       <div className="input-container">
         <label>
           Name:
@@ -39,7 +53,8 @@ const EForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
+            required
           />
         </label>
       </div>
@@ -51,7 +66,8 @@ const EForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
+            required
           />
         </label>
       </div>
@@ -63,77 +79,44 @@ const EForm = () => {
             name="age"
             value={formData.age}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
+            required
           />
         </label>
       </div>
-      <div className="input-container">
+      <div className={`input-container ${isDropdownOpen ? 'mb-10' : ''}`}>
         <label>
           Job title:
-          <button
-            id="dropdownDividerButton"
-            data-dropdown-toggle="dropdownDivider"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
-          >
-            Dropdown divider{" "}
-            <svg
-              class="w-4 h-4 ml-2"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="relative inline-block">
+            <button
+              onClick={toggleDropdown}
+              className={`text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center inline-flex items-center ${isDropdownOpen ? 'rounded-b-none' : ''}`}
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </button>
-          <div
-            id="dropdownDivider"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
-          >
-            <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownDividerButton"
-            >
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-            </ul>
-            <div class="py-2">
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              {formData.jobTitle ? formData.jobTitle : "Select Job Title"}
+              <svg
+                className={`w-4 h-4 ml-1 transform ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Separated link
-              </a>
-            </div>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9-7"></path>
+              </svg>
+            </button>
+            {isDropdownOpen && (
+              <div className="absolute left-0 mt-2 w-36 bg-white border border-gray-300 divide-y divide-gray-100 rounded-lg shadow">
+                {jobTitleOptions.map((jobTitle) => (
+                  <button
+                    key={jobTitle}
+                    onClick={() => selectJobTitle(jobTitle)}
+                    className="block w-full px-3 py-1 hover:bg-gray-100 text-gray-700 text-left"
+                  >
+                    {jobTitle}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </label>
       </div>
@@ -145,15 +128,13 @@ const EForm = () => {
             name="CV_field"
             value={formData.CV_field}
             onChange={handleChange}
-            className="block w-full border border-gray-300 rounded p-2 mb-2"
+            className="block w-full border border-gray-300 rounded p-1 mb-1"
+            required
           />
         </label>
       </div>
       <div className="flex justify-center">
-        <button
-          type="submit"
-          className="submit-button bg-blue-500 text-white px-4 py-2 rounded"
-        >
+        <button type="submit" className={`submit-button bg-blue-500 text-white px-2 py-1 rounded ${isDropdownOpen ? 'hidden' : 'block'}`}>
           Submit
         </button>
       </div>
